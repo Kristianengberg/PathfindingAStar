@@ -7,20 +7,22 @@ public class Grid : MonoBehaviour
     public Vector2 gridWorldSize;
     public float nodeRadius;
     Node[,] grid;
+    public GameObject mesh;
 
     float nodeDiameter;
     int gridSizeX, gridSizeY;
     public int maxHeight = 20;
     RaycastHit hit;
-    public Collider coll;
+    Collider coll;
 
     void Awake()
     {
+        coll = mesh.GetComponent<MeshCollider>();
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
         CreateGrid();
-        coll = GetComponent<Collider>();
+
     }
 
 

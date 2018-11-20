@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour {
 
+    private void Awake()
+    {
+        var meshColl = collMesh.GetComponent<MeshCollider>();
+        Destroy(meshColl);
+
+        collMesh.AddComponent<MeshCollider>();
+    }
+
     public enum DrawMode {NoiseMap, ColourMap, Mesh};
     public DrawMode drawMode;
+
+    public GameObject collMesh;
 
     const int mapChunkSize = 241;
     [Range(0,6)]
@@ -29,6 +39,7 @@ public class MapGenerator : MonoBehaviour {
 
     public void GenerateMap()
     {
+
         float[,] noiseMap = Noise.GenerateNoiseMap(mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, offset);
 
         Color[] colourMap = new Color[mapChunkSize * mapChunkSize];
@@ -61,6 +72,7 @@ public class MapGenerator : MonoBehaviour {
         {
             display.DrawMesh(MeshGenerator.GenerateTerrainMesh(noiseMap, meshHeightMultiplier, meshHeightCurve, levelOfDetail), TextureGenerator.TextureFromColourMap(colourMap, mapChunkSize, mapChunkSize));
         }
+
     }
 
     void OnValidate()
@@ -76,6 +88,7 @@ public class MapGenerator : MonoBehaviour {
     }
 
 }
+
 
 [System.Serializable]
 public struct TerrainType
