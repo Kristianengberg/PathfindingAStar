@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour {
 
+    
+
     private void Awake()
     {
-        var meshColl = collMesh.GetComponent<MeshCollider>();
-        Destroy(meshColl);
 
-        collMesh.AddComponent<MeshCollider>();
     }
 
     public enum DrawMode {NoiseMap, ColourMap, Mesh};
@@ -41,6 +40,10 @@ public class MapGenerator : MonoBehaviour {
 
     public void GenerateMap()
     {
+        var meshColl = collMesh.GetComponent<MeshCollider>();
+        DestroyImmediate(meshColl);
+
+        collMesh.AddComponent<MeshCollider>();
 
         float[,] noiseMap = Noise.GenerateNoiseMap(mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, offset);
 

@@ -8,12 +8,14 @@ public class Pathfinding : MonoBehaviour
     public Transform seeker, target;
     Grid grid;
 
+    public bool autoUpdate;
+
     void Awake()
     {
         grid = GetComponent<Grid>();
     }
 
-    void Update()
+    public void Pathfind()
     {
         grid = GetComponent<Grid>();
         FindPath(seeker.position, target.position);

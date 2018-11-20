@@ -15,7 +15,9 @@ public class Grid : MonoBehaviour
     RaycastHit hit;
     Collider coll;
 
-    void Awake()
+    public bool autoUpdate;
+
+    public void GridCreater()
     {
         coll = mesh.GetComponent<MeshCollider>();
         nodeDiameter = nodeRadius * 2;
