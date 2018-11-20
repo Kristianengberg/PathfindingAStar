@@ -11,7 +11,7 @@ public class Map : Editor {
     {
         
         MapGenerator mapGen = (MapGenerator)target;
-
+        
         if (DrawDefaultInspector())
         {
             if (mapGen.autoUpdate)
@@ -24,7 +24,6 @@ public class Map : Editor {
         {
             mapGen.GenerateMap();
         }
-
 
     }
 }

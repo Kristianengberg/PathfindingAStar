@@ -17,6 +17,8 @@ public class MapGenerator : MonoBehaviour {
 
     public GameObject collMesh;
 
+    Grid grid;
+
     const int mapChunkSize = 241;
     [Range(0,6)]
     public int levelOfDetail;
