@@ -7,6 +7,7 @@ public class Pathfinding : MonoBehaviour
 
     public Transform seeker, target;
     Grid grid;
+    public BezierSpline spline;
 
     public bool autoUpdate;
 
@@ -17,6 +18,7 @@ public class Pathfinding : MonoBehaviour
 
     public void Pathfind()
     {
+        //var splineScript = GetComponent<BezierSpline>();
         grid = GetComponent<Grid>();
         FindPath(seeker.position, target.position);
     }
@@ -74,16 +76,22 @@ public class Pathfinding : MonoBehaviour
 
     void RetracePath(Node startNode, Node endNode)
     {
+        
         List<Node> path = new List<Node>();
         Node currentNode = endNode;
-
+        int i = 0;
         while (currentNode != startNode)
         {
+            spline.points[i] = currentNode.worldPosition;
             path.Add(currentNode);
             currentNode = currentNode.parent;
+            i++;
+            if (spline.points.Length == i)
+            {
+                spline.AddCurve();
+            }
         }
         path.Reverse();
-
         grid.path = path;
 
     }
